@@ -283,7 +283,7 @@ export default BlogPage;
 
 ### Basic query for a list of blog posts
 
-```
+```graphql
 query BlogQuery {
   allDirectusBlogPost {
     edges {
@@ -303,9 +303,9 @@ query BlogQuery {
 
 ### Basic query for a single blog post (via directusId)
 
-```
+```graphql
 query BlogPostQuery($directusId: Int!) {
-  directusBlogPost(directusId: {eq: $directusId}) {
+  directusBlogPost(directusId: { eq: $directusId }) {
     directusId
     title
     author
@@ -319,12 +319,9 @@ query BlogPostQuery($directusId: Int!) {
 
 ### Filtered & sorted list of blog posts
 
-```
+```graphql
 query BlogPostQuery {
-  allDirectusBlogPost(
-    filter: {created: {gte: "2020-01-01 00:00:00"}},
-    sort: {order: DESC, fields: created}
-  ) {
+  allDirectusBlogPost(filter: { created: { gte: "2020-01-01 00:00:00" } }, sort: { order: DESC, fields: created }) {
     edges {
       node {
         directusId
@@ -344,7 +341,7 @@ query BlogPostQuery {
 
 Assumes a field `related_projects` exists as the join field on the `product` table in Directus.
 
-```
+```graphql
 query ProductQuery {
   allDirectusProduct {
     edges {
@@ -366,9 +363,9 @@ query ProductQuery {
 
 Assumes a field `owning_product_category` exists as the join field on the `product` table in Directus.
 
-```
+```graphql
 query ProductQuery($directusId: Int!) {
-  directusProduct(directusId: {eq: $directusId}) {
+  directusProduct(directusId: { eq: $directusId }) {
     directusId
     name
     created
@@ -385,9 +382,9 @@ query ProductQuery($directusId: Int!) {
 
 Assumes a field `images` exists as the join field on the `product` table in Directus.
 
-```
+```graphql
 query ProductQuery($directusId: Int!) {
-  directusProduct(directusId: {eq: $directusId}) {
+  directusProduct(directusId: { eq: $directusId }) {
     directusId
     name
     created
@@ -414,7 +411,7 @@ query ProductQuery($directusId: Int!) {
 
 Builds a set of thumbnails (150px x 150px) for all images. Assumes `downloadFiles` was `true` in the plugin's config. The `originalName` property should match the corresponding `directusFile` `filename` property.
 
-```
+```graphql
 query AllImageThumbnails {
   allImageSharp {
     edges {
