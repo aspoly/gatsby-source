@@ -38,6 +38,41 @@ jobs:
       matrix:
         node-version: [10.x, 12.x, 13.x]
 
+    services:
+      mariadb:
+        image: mariadb:10.4
+        env:
+          MYSQL_ROOT_PASSWORD: directus
+          MYSQL_DATABASE: directus
+          MYSQL_USER: directus
+          MYSQL_PASSWORD: directus
+        ports:
+          - 13306:3306
+        volumes:
+          - ./tests-data/db:/docker-entrypoint-initdb.d
+        options: >-
+          --health-cmd "mysql --silent --host=localhost --user=directus --password=directus --execute='select 1;'"
+          --health-interval 15s
+          --health-timeout 10s
+          --health-retries 10
+
+      directus:
+        image: directus/directus:v8-apache
+        env:
+          DIRECTUS_APP_ENV: 'development'
+          DIRECTUS_APP_TIMEZONE: 'UTC'
+          DIRECTUS_AUTH_PUBLICKEY: '5a9605e6329f83c6c686c78f506b853f'
+          DIRECTUS_AUTH_SECRETKEY: '797d10c4aafe563e8fe073fc151b5c29'
+          DIRECTUS_DATABASE_HOST: 'mariadb'
+          DIRECTUS_DATABASE_PORT: '3306'
+          DIRECTUS_DATABASE_NAME: 'directus'
+          DIRECTUS_DATABASE_USERNAME: 'directus'
+          DIRECTUS_DATABASE_PASSWORD: 'directus'
+        ports:
+          - 8080:80
+        volumes:
+          - ./tests-data/uploads:/var/directus/public/uploads
+
     steps:
       - uses: actions/checkout@v2
 
