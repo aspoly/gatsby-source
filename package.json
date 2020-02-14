@@ -7,7 +7,7 @@
   },
   "main": "gatsby-node.js",
   "scripts": {
-    "test": "echo \"Warning: no tests yet\"",
+    "test": "jest",
     "build": "tsc",
     "dev": "tsc --watch",
     "lint": "eslint . --ext .ts && prettier --check \"**/*.{js,ts,json,md,yml,yaml}\"",
@@ -42,13 +42,18 @@
     "pluralize": "^8.0.0"
   },
   "devDependencies": {
-    "@types/node": "^13.7.1",
+    "@types/jest": "^24.0.25",
+    "@types/node": "^13.7.0",
     "@types/pluralize": "0.0.29",
-    "@typescript-eslint/eslint-plugin": "^2.19.2",
-    "@typescript-eslint/parser": "^2.19.2",
+    "@types/request": "^2.48.4",
+    "@typescript-eslint/eslint-plugin": "^2.19.0",
+    "@typescript-eslint/parser": "^2.19.1",
     "eslint": "^6.8.0",
     "husky": "^4.2.1",
+    "jest": "^24.9.0",
     "prettier": "^1.19.1",
+    "request": "^2.88.0",
+    "ts-jest": "^24.3.0",
     "typescript": "^3.7.5"
   },
   "husky": {
