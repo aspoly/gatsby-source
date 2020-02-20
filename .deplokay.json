@@ -1,0 +1,23 @@
+{
+  "$schema": "node_modules/deplokay/config-schema.json",
+  "id": "directus-gatsby-source-release",
+  "mode": "npm",
+  "source": {
+    "local": {
+      "path": "."
+    }
+  },
+  "build": {
+    "npm": {
+      "cmd_name": "build",
+      "slim_package": true,
+      "component_names": ["LICENSE", "package.json", "README.md"],
+      "folder_names": ["dist"]
+    }
+  },
+  "publish": {
+    "branch": {
+      "branch": "releases"
+    }
+  }
+}
