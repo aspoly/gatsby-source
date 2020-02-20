@@ -15,7 +15,7 @@ export class GatsbyProcessor {
   private _typePrefix = 'Directus';
   private _includeJunctions = false;
   private _downloadFiles = true;
-  private _mutateContent: GatsbyProcessorMutateFunc = (node) => node;
+  private _mutateContent: GatsbyProcessorMutateFunc = node => node;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public gatsby: any;
