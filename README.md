@@ -38,6 +38,7 @@ Find details regarding the `options` object schema below.
 | includeJunctions   | `boolean`                                                    | `false`                     | Allows inclusion of the junction tables that manage M2M relations in the GraphQL layer.                                                                                                                                                |
 | downloadFiles      | `boolean`                                                    | `true`                      | Indicates if files should be downloaded to disk. Enables images to be used with other transform plugins. Setting to false could be useful if the project has many files.                                                               |
 | customRecordFilter | `((record: any, collection: string) => boolean) \| void`     | `void`                      | A function executed for each record, returning whether the record should be included in the content mesh. **Note:** If provided, this will **override** any `targetStatuses` value.                                                    |
+| mutateContent      | `((node: ContentNode) => ContentNode) \| void`               | `void`                      | A function executed for each content node to custom mutate the, the returning node return will be used by gatsby                                                                                                                       |
 
 ### Directus Config
 
