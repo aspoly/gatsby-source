@@ -1,17 +1,21 @@
 import createNodeHelpers from 'gatsby-node-helpers';
-import { ContentMesh } from '../content-mesh';
+import { ContentMesh, ContentNode } from '../content-mesh';
 import { GatsbyType } from './gatsby-type';
+
+export type GatsbyProcessorMutateFunc = (node: ContentNode) => ContentNode | undefined;
 
 export interface GatsbyProcessorConfig {
   typePrefix?: string;
   includeJunctions?: boolean;
   downloadFiles?: boolean;
+  mutateContent?: GatsbyProcessorMutateFunc;
 }
 
 export class GatsbyProcessor {
   private _typePrefix = 'Directus';
   private _includeJunctions = false;
   private _downloadFiles = true;
+  private _mutateContent: GatsbyProcessorMutateFunc = (node) => node;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public gatsby: any;
@@ -32,6 +36,10 @@ export class GatsbyProcessor {
 
     if (typeof config.downloadFiles === 'boolean') {
       this._downloadFiles = config.downloadFiles;
+    }
+
+    if (typeof config.mutateContent === 'function') {
+      this._mutateContent = config.mutateContent;
     }
 
     const { createNodeFactory, generateNodeId } = createNodeHelpers({
@@ -58,6 +66,10 @@ export class GatsbyProcessor {
         .reduce((flattened, nodes) => [...flattened, ...nodes], [] as any[])
         .map(node => this.gatsby.actions.createNode(node)),
     );
+  }
+
+  public mutateContent(node: ContentNode): ContentNode | undefined {
+    return this._mutateContent(node);
   }
 
   public get downloadFiles(): boolean {

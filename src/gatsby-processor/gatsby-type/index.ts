@@ -29,8 +29,8 @@ export class GatsbyType {
       if (this._collection.isFileCollection && this._processor.downloadFiles) {
         return new GatsbyFileNode(node, this._processor);
       }
-
-      return new GatsbyNode(node, this._processor);
+      const contentNode = this._processor.mutateContent(node) || node;
+      return new GatsbyNode(contentNode, this._processor);
     });
   }
 
