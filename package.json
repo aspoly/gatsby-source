@@ -1,0 +1,50 @@
+{
+	"name": "@directus/gatsby-source-directus",
+	"version": "0.2.3-poly",
+	"description": "A Gatsby source plugin to pull content from a Directus CMS backend.",
+	"publishConfig": {
+		"access": "public"
+	},
+	"main": "gatsby-node.js",
+	"scripts": {
+		"test": "echo \"Warning: no tests yet\"",
+		"build": "tsc",
+		"dev": "tsc --watch",
+		"lint": "eslint . --ext .ts && prettier --check \"**/*.{js,ts,json,md,yml,yaml}\"",
+		"format": "prettier --write \"**/*.{js,ts,json,md,yml,yaml}\"",
+		"release": "deplokay -c .deplokay.json",
+		"release-original": "npm version -m \":rocket: Release %s\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/directus/gatsby-source.git"
+	},
+	"keywords": [
+		"gatsby",
+		"gatsby-plugin",
+		"gatsby-source",
+		"gatsby-source-plugin",
+		"gatsby-source-directus",
+		"gatsby-directus",
+		"directus",
+		"directus-cms"
+	],
+	"author": "",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/directus/gatsby-source/issues"
+	},
+	"homepage": "https://github.com/directus/gatsby-source#readme",
+	"dependencies": {
+		"@directus/sdk-js": "^6.0.2",
+		"colors": "^1.4.0",
+		"gatsby-node-helpers": "^0.3.0",
+		"gatsby-source-filesystem": "^2.1.48",
+		"pluralize": "^8.0.0"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "npm run lint"
+		}
+	}
+}
